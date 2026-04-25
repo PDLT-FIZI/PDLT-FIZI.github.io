@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Makao ya Habari - PDLT Fizi</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+       .container { max-width: 900px; margin: auto; padding: 20px; }
+       .kadi { background: #f4f4f4; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 5px solid #2E7D32; }
+       .video { position: relative; padding-bottom: 56.25%; height: 0; margin: 15px 0; }
+       .video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+       .grid-picha { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
+       .grid-picha img { width: 100%; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Makao ya Habari na Mafunzo ya PDLT Fizi</h1>
+        <p>Karibu kwenye chombo cha mawasiliano na elimu ya chama. Lami Kila Kijiji, Elimu Kila Simu.</p>
+        <a href="index.html">← Rudi Mwanzo</a> | <a href="wanachama.html">Eneo la Wanachama →</a>
+
+        <!-- SEHEMU 1: VIDEO -->
+        <div class="kadi">
+            <h2>🎥 Video za Hivi Karibuni</h2>
+            <p>Hotuba na matukio ya PDLT Fizi</p>
+
+            <!-- BADILISHA KODE_YA_VIDEO na ID ya YouTube yako -->
+            <div class="video">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <p><strong>Hotuba:</strong> Ufunguzi wa Tawi la Mboko</p>
+        </div>
+
+        <!-- SEHEMU 2: PICHA -->
+        <div class="kadi">
+            <h2>📸 Picha za Matukio</h2>
+            <div class="grid-picha">
+                <!-- PAKIA PICHA KWENYE REPO, HALAFU BADILISHA MAJINA HAPA -->
+                <img src="mkutano1.jpg" alt="Mkutano wa hadhara">
+                <img src="vijana2.jpg" alt="Vijana wa PDLT">
+                <img src="maendeleo3.jpg" alt="Mradi wa maendeleo">
+            </div>
+            <p><i>Kumbuka: Pakia picha zako GitHub kwanza na uzibadilishe majina hapa.</i></p>
+        </div>
+
+        <!-- SEHEMU 3: VITABU PDF -->
+        <div class="kadi">
+            <h2>📚 Vitabu na Nyaraka</h2>
+            <ul>
+                <!-- PAKIA PDF KWENYE REPO, HALAFU BADILISHA LINK -->
+                <li><a href="katiba-pdlt.pdf" target="_blank">Katiba ya PDLT Fizi - PDF</a></li>
+                <li><a href="mpango-kazi-2026.pdf" target="_blank">Mpango Kazi 2026 - PDF</a></li>
+                <li><a href="muongozo-mwanachama.pdf" target="_blank">Mwongozo wa Mwanachama - PDF</a></li>
+            </ul>
+        </div>
+
+        <!-- SEHEMU 4: MAELEZO & MATANGAZO -->
+        <div class="kadi">
+            <h2>📢 Matangazo ya Haraka</h2>
+            <h3>30 Aprili 2026: Mkutano Mkuu wa Vijana</h3>
+            <p>Mahali: Uwanjani Mwenge, Fizi. Saa 4 asubuhi. Ajenda: Mikakati ya uchaguzi.</p>
+
+            <h3>15 Mei 2026: Uzinduzi wa Mradi wa Maji</h3>
+            <p>Kijiji cha Lulimba. Mgeni rasmi: Mwenyekiti wa PDLT Fizi.</p>
+        </div>
+
+        <!-- SEHEMU 5: COMMENTS - TUTAZIWEKA BAADAYE -->
+        <div class="kadi">
+            <h2>💬 Maoni ya Wananchi</h2>
+            <p><i>Sehemu ya maoni itafunguliwa hivi karibuni. Kwa sasa tuma maoni WhatsApp.</i></p>
+        </div>
+
+    </div>
+</body>
+</html>
