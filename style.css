@@ -1,0 +1,28 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { height: 100%; }
+body { display: flex; flex-direction: column; min-height: 100vh; font-family: sans-serif; }
+  
+header { background: #008080; color: white; padding: 15px 20px; }
+.nav-container { display: flex;
+    justify-content: space-between; align-items: center; }
+  .logo { font-size: 28px; font-weight: bold; }
+  nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
+  nav a { color: white; text-decoration: none; }
+  .btn { background: black; color: white; padding: 8px 18px; border-radius: 20px; }
+  
+  main { flex: 1; padding: 30px 20px; text-align: center; }
+  .title { font-size: 30px; color: #008080; font-weight: bold; }
+  .subtitle { margin: 15px 0; }
+  .desc { max-width: 600px; margin: 20px auto; line-height: 1.6; }
+  .cta-btn { background: #008080; color: white; padding: 15px 30px; 
+  text-decoration: none; border-radius: 25px; display: inline-block; margin-top: 15px; }
+  
+  footer { background: #000; color: white; text-align: center; padding: 15px 10px; font-size: 14px; }
+
+  /* Simu ndogo - Panga menu vizuri */
+  @media (max-width: 600px) {
+    .nav-container { flex-direction: column; gap: 15px; }
+    nav { justify-content: center; }
+    .title { font-size: 24px; }
+  }
+
