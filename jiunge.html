@@ -1,68 +1,52 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jiunge na PDLT</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    html, body { height: 100%; }
-    body { display: flex; flex-direction: column; min-height: 100vh; font-family: sans-serif; }
-    
-    header { background: #008080; color: white; padding: 15px 20px; }
-    .nav-container { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 28px; font-weight: bold; }
-    nav { display: flex; gap: 20px; align-items: center; flex-wrap: wrap; }
-    nav a { color: white; text-decoration: none; }
-    .btn { background: black; color: white; padding: 8px 18px; border-radius: 20px; }
-    
-    main { flex: 1; padding: 20px; }
-    .form-title { color: #008080; text-align: center; margin: 20px 0; }
-    .form-desc { text-align: center; max-width: 600px; margin: 0 auto 30px auto; }
-    
-    footer { background: #000; color: white; text-align: center; padding: 15px 10px; font-size: 14px; }
-
-    @media (max-width: 600px) {
-      .nav-container { flex-direction: column; gap: 15px; }
-      nav { justify-content: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jiunge na PDLT-FIZI</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            background: linear-gradient(135deg, #0D47A1, #1976D2); 
+            margin: 0; 
+            padding: 20px; 
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            max-width: 700px; 
+            margin: 20px auto; 
+            border-radius: 12px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
+        }
+        h1 { color: #0D47A1; text-align: center; margin-bottom: 10px; }
+        .maelezo { text-align: center; color: #666; margin-bottom: 25px; line-height: 1.6; }
+        iframe { width: 100%; height: 1000px; border: 2px solid #ddd; border-radius: 8px; }
+        .onyo { 
+            background: #FFF3E0; 
+            border-left: 4px solid #FF6F00; 
+            padding: 15px; 
+            margin: 20px 0; 
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="nav-container">
-      <div class="logo">PDLT</div>
-      <nav>
-        <a href="index.html">Home</a>
-        <a href="about.html">About</a>
-        <a href="mpango.html">Mpango</a>
-        <a href="jiunge.html" class="btn">Jiunge</a>
-      </nav>
+    <div class="container">
+        <h1>🇨🇩 Jisajili Kuwa Mwanachama PDLT-FIZI</h1>
+        <p class="maelezo">
+            Karibu kwenye chama cha watu. Jaza fomu hii kwa ukamilifu. 
+            <strong>Baada ya kutuma, utapokea Neno la Siri la kuingia kwenye nyenzo za siri za chama.</strong>
+        </p>
+        
+        <div class="onyo">
+            <strong>Muhimu:</strong> Baada ya kubonyeza "Submit", usifunge ukurasa. Subiri ujumbe wa uthibitisho wenye <strong>Neno la Siri</strong>. Nakili neno hilo mara moja.
+        </div>
+
+        <!-- GOOGLE FORM YAKO IMEWEKWA HAPA -->
+        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSddq1wprFhM8LkwuzKMfcGUniVKNGRSYhRE9f0MJ3v6bzjZQA/viewform?embedded=true">
+            Inapakia fomu... Tafadhali subiri.
+        </iframe>
     </div>
-  </header>
-
-  <main>
-    <h1 class="form-title">Jiunge na Harakati ya PDLT</h1>
-    <p class="form-desc">
-      Jaza fomu hapa chini. Sisi ni siri, hatuuzi namba yako. 
-      Tutakujulisha mkutano wa kwanza wa kata yako Fizi.
-    </p>
-    
-    <!-- WEKA CODE YAKO YA GOOGLE FORM HAPA CHINI -->
-    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScbW8n8ejEenMkpuaCFLhsMB_r89hBVpjOtOLwW7HTFCW9RhA/viewform?usp=dialog" 
-            width="100%" 
-            height="500" 
-            frameborder="0" 
-            marginheight="0" 
-            marginwidth="0">
-      Inapakia Fomu...
-    </iframe>
-    <!-- MWISHO WA CODE YA GOOGLE FORM -->
-    
-  </main>
-
-  <footer>
-    © Parti pour le Développement, la Liberté et la Transparence
-  </footer>
 </body>
 </html>
