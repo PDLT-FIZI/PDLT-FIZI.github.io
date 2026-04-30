@@ -1,88 +1,66 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Makao ya Habari - PDLT Fizi</title>
-    <link rel="stylesheet" href="style.css">
-    <style>
-       .container { max-width: 900px; margin: auto; padding: 20px; }
-       .kadi { background: #f4f4f4; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 5px solid #2E7D32; }
-       .video { position: relative; padding-bottom: 56.25%; height: 0; margin: 15px 0; }
-       .video iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-       .grid-picha { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; }
-       .grid-picha img { width: 100%; border-radius: 5px; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Habari za Chama</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: sans-serif; margin: 0; background: #f0f2f5; }
+    .header { background: #003366; color: white; padding: 1rem; display: flex; justify-content: space-between; align-items: center; }
+    .content { padding: 2rem; max-width: 800px; margin: 0 auto; }
+    .card { background: white; padding: 1.5rem; border-radius: 8px; margin-bottom: 1rem; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+    button { background: #cc0000; color: white; padding: 10px 20px; border: none; border-radius: 4px; cursor: pointer; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Makao ya Habari na Mafunzo ya PDLT Fizi</h1>
-        <p>Karibu kwenye chombo cha mawasiliano na elimu ya chama. Lami Kila Kijiji, Elimu Kila Simu.</p>
-        <a href="index.html">← Rudi Mwanzo</a> <a href="wanachama.html">Nenda kwa Wanachama</a>
-    
-        <!-- SEHEMU 1: VIDEO -->
-        <div class="kadi">
-            <h2>🎥 Video za Hivi Karibuni</h2>
-            <p>Hotuba na matukio ya PDLT Fizi</p>
-
-            <!-- BADILISHA KODE_YA_VIDEO na ID ya YouTube yako -->
-            <div class="video">
-                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
-            </div>
-            <p><strong>Hotuba:</strong> Ufunguzi wa Tawi la juu</p>
-        </div>
-
-        <!-- SEHEMU 2: PICHA -->
-        <div class="kadi">
-            <h2>📸 Picha za Matukio</h2>
-            <div class="grid-picha">
-                <!-- PAKIA PICHA KWENYE REPO, HALAFU BADILISHA MAJINA HAPA -->
-                <img src="mkutano1.jpg" alt="Mkutano wa hadhara">
-                <img src="vijana2.jpg" alt="Vijana wa PDLT">
-                <img src="maendeleo3.jpg" alt="Mradi wa maendeleo">
-            </div>
-            <p><i>
-            </i></p>
-        </div>
-
-        <!-- SEHEMU 3: VITABU PDF -->
-        <div class="kadi">
-            <h2>📚 Vitabu na Nyaraka</h2>
-            <ul>
-                <!-- PAKIA PDF KWENYE REPO, HALAFU BADILISHA LINK -->
-                <li><a href="katiba-pdlt.pdf" target="_blank">Katiba ya PDLT Fizi - PDF</a></li>
-                <li><a href="mpango-kazi-2026.pdf" target="_blank">Mpango Kazi 2026 - PDF</a></li>
-                <li><a href="muongozo-mwanachama.pdf" target="_blank">Mwongozo wa Mwanachama - PDF</a></li>
-            </ul>
-        </div>
-
-        <!-- SEHEMU 4: MAELEZO & MATANGAZO -->
-        <div class="kadi">
-            <h2>📢 Matangazo ya Haraka</h2>
-            <h3>30 Aprili 2026: Mkutano Mkuu wa Vijana</h3>
-            <p>Mahali: Uwanjani Mwenge, Fizi. Saa 4 asubuhi. Ajenda: Mikakati ya uchaguzi.</p>
-
-            <h3>tutaakikisha kila kijiji kinapata maji safi</h3>
-            <p>PDLT ipo pote Fizi</p>
-        </div>
-
-        <!-- SEHEMU 5: COMMENTS - TUTAZIWEKA BAADAYE -->
-        <div class="kadi">
-    <h2>💬 Maoni ya Wananchi</h2>
-    <p>Toa maoni yako. Uongozi wa PDLT unasoma kila neno.</p>
-    
-    <!-- UTTERANCES COMMENTS - ANZA HAPA -->
-    <script src="https://utteranc.es/client.js"
-        repo="PDLT-FIZI/PDLT-FIZI.github.io"
-        issue-term="pathname"
-        label="maoni-ya-wananchi"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-    </script>
-    <!-- UTTERANCES COMMENTS - ISHA HAPA -->
-        </div>
-
+  <div class="header">
+    <h2>Habari za Ndani - PDLT-FIZI</h2>
+    <button onclick="toka()">Toka</button>
+  </div>
+  <div class="content" id="content">
+    <div class="card">
+      <h3>Inapakia...</h3>
     </div>
+  </div>
+
+<script>
+  const SUPABASE_URL = 'WEKA_URL_YAKO_HAPA';
+  const SUPABASE_ANON_KEY = 'WEKA_PUBLISHABLE_KEY_YAKO_HAPA';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function angaliaMtu() {
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      window.location.href = 'login.html';
+      return;
+    }
+
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('jina_kamili')
+      .eq('id', user.id)
+      .single();
+
+    document.getElementById('content').innerHTML = `
+      <div class="card">
+        <h3>Karibu, ${profile?.jina_kamili || 'Mwanachama'}!</h3>
+        <p>Hii ni sehemu ya siri ya wanachama wa PDLT-FIZI. Habari za chama zitawekwa hapa.</p>
+      </div>
+      <div class="card">
+        <h3>Tangazo la Leo</h3>
+        <p>Mkutano wa viongozi utafanyika Jumapili saa 4 asubuhi. Weka ratiba yako.</p>
+      </div>
+    `;
+  }
+
+  async function toka() {
+    await supabase.auth.signOut();
+    window.location.href = 'login.html';
+  }
+
+  angaliaMtu();
+</script>
 </body>
 </html>
