@@ -1,52 +1,60 @@
 <!DOCTYPE html>
 <html lang="sw">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jiunge na PDLT-FIZI</title>
-    <style>
-        body { 
-            font-family: Arial, sans-serif; 
-            background: linear-gradient(135deg, #0D47A1, #1976D2); 
-            margin: 0; 
-            padding: 20px; 
-        }
-        .container { 
-            background: white; 
-            padding: 30px; 
-            max-width: 700px; 
-            margin: 20px auto; 
-            border-radius: 12px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3); 
-        }
-        h1 { color: #0D47A1; text-align: center; margin-bottom: 10px; }
-        .maelezo { text-align: center; color: #666; margin-bottom: 25px; line-height: 1.6; }
-        iframe { width: 100%; height: 1000px; border: 2px solid #ddd; border-radius: 8px; }
-        .onyo { 
-            background: #FFF3E0; 
-            border-left: 4px solid #FF6F00; 
-            padding: 15px; 
-            margin: 20px 0; 
-            font-size: 14px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingia PDLT-FIZI</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+    .form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
+    h2 { color: #003366; text-align: center; }
+    input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+    button { width: 100%; background: #003366; color: white; padding: 14px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button:disabled { background: #999; }
+    #message { text-align: center; margin-top: 1rem; font-weight: bold; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🇨🇩 Jisajili Kuwa Mwanachama PDLT-FIZI</h1>
-        <p class="maelezo">
-            Karibu kwenye chama cha watu. Jaza fomu hii kwa ukamilifu. 
-            <strong>Baada ya kutuma, utapokea Neno la Siri la kuingia kwenye nyenzo za siri za chama.</strong>
-        </p>
-        
-        <div class="onyo">
-            <strong>Muhimu:</strong> Baada ya kubonyeza "Submit", usifunge ukurasa. Subiri ujumbe wa uthibitisho wenye <strong>Neno la Siri</strong>. Nakili neno hilo mara moja.
-        </div>
+  <div class="form">
+    <h2>Ingia Uwanjani</h2>
+    <input type="email" id="email" placeholder="Barua Pepe" required>
+    <input type="password" id="password" placeholder="Neno la Siri" required>
+    <button id="loginBtn" onclick="ingia()">Ingia</button>
+    <div id="message"></div>
+    <p style="text-align:center; margin-top:1rem;">Huna akaunti? <a href="jiunge.html">Jiunge</a></p>
+  </div>
 
-        <!-- GOOGLE FORM YAKO IMEWEKWA HAPA -->
-        <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSddq1wprFhM8LkwuzKMfcGUniVKNGRSYhRE9f0MJ3v6bzjZQA/viewform?embedded=true">
-            Inapakia fomu... Tafadhali subiri.
-        </iframe>
-    </div>
+<script>
+  const SUPABASE_URL = 'WEKA_URL_YAKO_HAPA';
+  const SUPABASE_ANON_KEY = 'WEKA_PUBLISHABLE_KEY_YAKO_HAPA';
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function ingia() {
+    const btn = document.getElementById('loginBtn');
+    const msg = document.getElementById('message');
+    btn.disabled = true;
+    msg.style.color = 'blue';
+    msg.innerText = 'Inaingia...';
+
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+
+    if (error) {
+      msg.style.color = 'red';
+      msg.innerText = 'Hitilafu: Barua pepe au neno la siri si sahihi';
+      btn.disabled = false;
+    } else {
+      msg.style.color = 'green';
+      msg.innerText = 'Karibu! Inaelekeza...';
+      setTimeout(() => { window.location.href = 'habari.html'; }, 1000);
+    }
+  }
+</script>
 </body>
 </html>
