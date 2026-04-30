@@ -3,26 +3,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ingia PDLT-FIZI</title>
+  <title>Jiunge na PDLT-FIZI</title>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body { font-family: sans-serif; background: #f0f2f5; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
     .form { background: white; padding: 2rem; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); width: 90%; max-width: 400px; }
     h2 { color: #003366; text-align: center; }
     input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-    button { width: 100%; background: #003366; color: white; padding: 14px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
+    button { width: 100%; background: #cc0000; color: white; padding: 14px; border: none; border-radius: 4px; font-size: 16px; cursor: pointer; }
     button:disabled { background: #999; }
     #message { text-align: center; margin-top: 1rem; font-weight: bold; }
   </style>
 </head>
 <body>
   <div class="form">
-    <h2>Ingia Uwanjani</h2>
+    <h2>Jiunge na Mapinduzi</h2>
+    <input type="text" id="jina" placeholder="Jina Kamili" required>
+    <input type="tel" id="simu" placeholder="Namba ya Simu" required>
+    <input type="text" id="mkoa" placeholder="Mkoa" required>
     <input type="email" id="email" placeholder="Barua Pepe" required>
     <input type="password" id="password" placeholder="Neno la Siri" required>
-    <button id="loginBtn" onclick="ingia()">Ingia</button>
+    <button id="signupBtn" onclick="jiunge()">Jiunge Sasa</button>
     <div id="message"></div>
-    <p style="text-align:center; margin-top:1rem;">Huna akaunti? <a href="jiunge.html">Jiunge</a></p>
+    <p style="text-align:center; margin-top:1rem;">Umeshajiunga? <a href="login.html">Ingia</a></p>
   </div>
 
 <script>
@@ -30,29 +33,39 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_t5DVIP99ktQgFFMNAtPSHQ_bs58x4iK';
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  async function ingia() {
-    const btn = document.getElementById('loginBtn');
+  async function jiunge() {
+    const btn = document.getElementById('signupBtn');
     const msg = document.getElementById('message');
     btn.disabled = true;
     msg.style.color = 'blue';
-    msg.innerText = 'Inaingia...';
+    msg.innerText = 'Inatuma...';
 
+    const jina = document.getElementById('jina').value;
+    const simu = document.getElementById('simu').value;
+    const mkoa = document.getElementById('mkoa').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email: email,
-      password: password
+      password: password,
+      options: {
+        data: {
+          jina_kamili: jina,
+          namba_ya_simu: simu,
+          mkoa: mkoa
+        }
+      }
     });
 
     if (error) {
       msg.style.color = 'red';
-      msg.innerText = 'Hitilafu: Barua pepe au neno la siri si sahihi';
+      msg.innerText = 'Hitilafu: ' + error.message;
       btn.disabled = false;
     } else {
       msg.style.color = 'green';
-      msg.innerText = 'Karibu! Inaelekeza...';
-      setTimeout(() => { window.location.href = 'habari.html'; }, 1000);
+      msg.innerText = 'Umefanikiwa! Inaelekeza...';
+      setTimeout(() => { window.location.href = 'habari.html'; }, 2000);
     }
   }
 </script>
