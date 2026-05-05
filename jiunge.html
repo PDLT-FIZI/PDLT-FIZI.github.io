@@ -33,41 +33,74 @@
   const SUPABASE_ANON_KEY = 'sb_publishable_t5DVIP99ktQgFFMNAtPSHQ_bs58x4iK';
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  async function jiunge() {
-    const btn = document.getElementById('signupBtn');
-    const msg = document.getElementById('message');
-    btn.disabled = true;
-    msg.style.color = 'blue';
-    msg.innerText = 'Inatuma...';
+async function jiunge() {
+  const btn = document.getElementById('signupBtn');
+  const msg = document.getElementById('message');
+  btn.disabled = true;
+  msg.style.color = 'blue';
+  msg.innerText = 'Inatuma...';
 
-    const jina = document.getElementById('jina').value;
-    const simu = document.getElementById('simu').value;
-    const mkoa = document.getElementById('mkoa').value;
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+  const jina = document.getElementById('jina').value.trim();
+  const simu = document.getElementById('simu').value.trim();
+  const mkoa = document.getElementById('mkoa').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
 
-    const { data, error } = await supabase.auth.signUp({
+  // 1. Sajili user
+  const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      data: { jina_kamili: jina, namba_ya_simu: simu, mkoa: mkoa }
+    }
+  });
+
+  if (signUpError) {
+    msg.style.color = 'red';
+    msg.innerText = 'Hitilafu: ' + signUpError.message;
+    btn.disabled = false;
+    return;
+  }
+
+  // 2. Hakikisha tuna session - kama hakuna, ingia manual
+  let session = signUpData.session;
+  if (!session) {
+    const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
       email: email,
-      password: password,
-      options: {
-        data: {
-          jina_kamili: jina,
-          namba_ya_simu: simu,
-          mkoa: mkoa
-        }
-      }
+      password: password
+    });
+    if (signInError) {
+      msg.style.color = 'red';
+      msg.innerText = 'Akaunti imeundwa lakini kuingia imeshindikana: ' + signInError.message;
+      btn.disabled = false;
+      return;
+    }
+    session = signInData.session;
+  }
+
+  // 3. Ingiza data kwa profiles - upsert inahakikisha inaingia hata kama trigger imeshindwa
+  const { error: upsertError } = await supabase
+    .from('profiles')
+    .upsert({ 
+      id: session.user.id, 
+      jina_kamili: jina, 
+      namba_ya_simu: simu, 
+      mkoa: mkoa,
+      updated_at: new Date()
     });
 
-    if (error) {
-      msg.style.color = 'red';
-      msg.innerText = 'Hitilafu: ' + error.message;
-      btn.disabled = false;
-    } else {
-      msg.style.color = 'green';
-      msg.innerText = 'Umefanikiwa! Inaelekeza...';
-      setTimeout(() => { window.location.href = 'habari.html'; }, 2000);
-    }
+  if (upsertError) {
+    console.log('Upsert error:', upsertError);
+    msg.style.color = 'orange';
+    msg.innerText = 'Umejiunga, lakini jina limeshindwa kusave. Error: ' + upsertError.message;
+    btn.disabled = false;
+    return;
   }
+
+  msg.style.color = 'green';
+  msg.innerText = 'Umefanikiwa! Inaelekeza...';
+  setTimeout(() => { window.location.href = 'habari.html'; }, 1000);
+    }
 </script>
 </body>
 </html>
